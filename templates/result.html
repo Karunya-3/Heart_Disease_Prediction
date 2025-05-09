@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #e9ecef;
+        }
+    </style>
+</head>
+<body>
+    {% if prediction %}
+        <div class="result">
+            <h2>Prediction Result</h2>
+            <p>Based on the provided information, the prediction for the 10-year risk of heart disease is: <strong>{{ prediction }}</strong></p>
+        </div>
+    {% endif %}
+</body>
+</html>
