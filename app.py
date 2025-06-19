@@ -1,12 +1,17 @@
 from flask import Flask,request,render_template
 import pickle
 import numpy as np
+from flask import Flask, render_template, request
 
 app=Flask(__name__)
 model = pickle.load(open('rf.pkl', 'rb'))
 scaler = pickle.load(open('scaler.pkl', 'rb'))
 
+@app.route('/')
+def index():
+    return render_template('index.html')
 # Prediction function
+
 def predict(model, scaler, gender, age, currentSmoker, cigsPerDay, BPMeds, prevalentStroke, prevalentHyp, diabetes,
             totChol, sysBP, diaBP, BMI, heartRate, glucose):
     # Encode categorical variables
@@ -30,14 +35,12 @@ def predict(model, scaler, gender, age, currentSmoker, cigsPerDay, BPMeds, preva
     return result[0]
 
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+
 
 @app.route('/predict',methods=['GET','POST'])
 def pred():
     if request.method=='POST':
-        gender = request.form['male']
+        gender = request.form['gender']
         age = int(request.form['age'])
         currentSmoker = request.form['currentSmoker']
         cigsPerDay = float(request.form['cigsPerDay'])
